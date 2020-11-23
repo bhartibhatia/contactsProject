@@ -1,26 +1,54 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import ListContacts from './ListContacts';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+class App extends Component {
+  state = {
+  contacts: [
+    {
+      "id": "ryan",
+      "name": "Ryan Florence",
+      "email": "ryan@reacttraining.com",
+      "avatarURL": "http://localhost:5001/ryan.jpg"
+    },
+    {
+      "id": "michael",
+      "name": "Michael Jackson",
+      "email": "michael@reacttraining.com",
+      "avatarURL": "http://localhost:5001/michael.jpg"
+    },
+    {
+      "id": "tyler",
+      "name": "Tyler McGinnis",
+      "email": "tyler@reacttraining.com",
+      "avatarURL": "http://localhost:5001/tyler.jpg"
+    }
+  ]
+  }
 
-export default App;
+  removeContact = (ContactPakdna) =>{
+    console.log('contact jo peeche se aya',ContactPakdna)
+    // this.state.contacts.map((item) =>{
+    //   console.log('matching with map function',ContactPakdna.id === item.id)
+    // })
+    this.setState({
+      contacts: this.state.contacts.filter((filtercontactitem) => {
+        return filtercontactitem.id !== ContactPakdna.id
+        })
+    })
+    
+//     this.setState((state) => ({
+//       contacts: state.contacts.filter((filtercontactitem) => {
+// return filtercontactitem.id !== ContactPakdna.id
+//       })
+//     }))
+  }
+      
+  render() {
+      return (
+        <div>
+          <ListContacts mycontacts={this.state.contacts} onDelete={this.removeContact}/>
+        </div>
+      )
+    }
+  }
+  export default App;
